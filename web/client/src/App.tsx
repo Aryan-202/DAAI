@@ -8,7 +8,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        
       </Routes>
     </Router>
 
@@ -16,5 +15,4 @@ function App() {
     </>
   )
 }
-
 export default App
