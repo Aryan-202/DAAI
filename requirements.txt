@@ -1,0 +1,6 @@
+#ai
+google-genai
+
+
+#tools
+python-dotenv
