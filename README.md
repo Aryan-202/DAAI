@@ -1,140 +1,225 @@
-Here’s a clean, professional **README.md** you can use for your AI-Powered Spreadsheet App.
-If you want, I can also generate a more visual version with badges, emojis, or a tech-diagram.
+Here is a **clean, realistic, professional V2 README** based on your **actual architecture** and the **AI-router system you are now implementing**.
+
+This version reflects:
+
+* Next.js front-end (current state)
+* Python processing layer (scripts, notebooks, prompts)
+* AI Router Prompt + JSON Schema
+* Data-flow between frontend ↔ Python
+* Your MVP (CSV cleaner → Spreadsheet engine)
+* Realistic scope — no overclaiming
+
+You can paste this directly into **README.md**.
 
 ---
 
-# 🚀 AI-Powered Spreadsheet App
+# 🚀 AI-Powered Spreadsheet App — **V2**
 
-### *An AI-first spreadsheet ecosystem that makes data analysis effortless and accessible.*
+### *A cross-platform, AI-first data-processing engine built on a hybrid Next.js + Python workflow.*
 
 ---
 
 ## 📌 Overview
 
-The **AI-Powered Spreadsheet App** is a cross-platform, intelligent spreadsheet system designed to make data work for *everyone*—students, freelancers, small businesses, and professionals—without requiring Excel knowledge, formulas, or technical expertise.
+**V2 redesign introduces a structured AI Command Router**, a backend action engine, and a clean separation between UI and data processing.
 
-Starting as a simple AI CSV tool, it evolves into a complete spreadsheet platform with deep AI integration, cross-platform support, and built-in business features.
-
----
-
-## ✨ Key Features
-
-### 🔹 AI at the Core
-
-* Automatic data cleaning
-* Instant insights & summaries
-* AI-suggested formulas
-* Automated dashboard & chart generation
-* Column transformation recommendations
-
-### 🔹 Spreadsheet Capabilities
-
-* Custom grid with virtual scrolling
-* Cell editing & formatting
-* Formula support
-* Undo/redo
-* Offline functionality via Tauri desktop app
-
-### 🔹 Cross-Platform
-
-* **Web App**
-* **Desktop (Tauri)**
-* **Mobile App (React Native)**
+The goal:
+**Transform a simple CSV-cleaning prototype into the foundation of a full spreadsheet engine with AI-controlled operations.**
 
 ---
 
-## 🎯 Target Users
+## 🏗️ Architecture (V2)
 
-* Students handling assignments or research datasets
-* Freelancers building quick reports for clients
-* Small business owners needing insights without complexity
-* Professionals automating daily spreadsheet tasks
-* Anyone intimidated by Google Sheets/Excel
+Your app is now split into two clear layers:
+
+### **1. Next.js Frontend**
+
+* File upload
+* User instructions / prompts
+* Displays cleaned/processed results
+* Prepares data summary before sending to AI
+* API route communicates with Python scripts
+
+### **2. Python Processing Layer**
+
+Located in the root-level project folders:
+
+```
+/prompts/          → router prompt, JSON schema  
+/scripts/          → core processors (router.py + actions)  
+/notebooks/        → experiments + prototypes  
+```
+
+This layer handles:
+
+* AI routing
+* JSON schema validation
+* Data transformations
+* Cleaning, summarizing, chart planning, formatting
+* Output back to Next.js
+
+---
+
+## ✨ Key Improvements in V2
+
+### 🔹 AI Command Routing
+
+User instructions are no longer interpreted loosely.
+Instead, a **Router Prompt** forces the model to output:
+
+```json
+{
+ "action": "",
+ "columns": [],
+ "parameters": {}
+}
+```
+
+This makes the system predictable, debuggable, and scalable.
+
+### 🔹 Deterministic Backend Engine
+
+Python scripts safely perform operations like:
+
+* Column cleaning
+* Data summarization
+* Row filtering
+* Sorting
+* Applying formulas
+* Chart planning
+
+The AI never touches the data directly — it only **requests operations**.
+
+### 🔹 Better Project Structure
+
+Your prompts, schema, scripts, and notebooks are now organized into folders designed for long-term growth.
+
+### 🔹 Clean Data Flow
+
+```
+Next.js → Python router → AI model → JSON command → Python action → Next.js
+```
+
+---
+
+## 🧠 Core Features (V2)
+
+### 🔹 AI Processing
+
+* Operation routing via JSON schema
+* Safe and consistent command structure
+* Automatic retries for malformed AI output
+* Column/row understanding via dynamic data summary
+
+### 🔹 Data Operations
+
+* Remove null / invalid values
+* Convert types
+* Normalize messy text
+* Basic transformations
+* Row filtering
+* Sorting
+* Quick insights
+* Dashboard planning (V2.1)
+
+### 🔹 Prototype Spreadsheet Engine (Coming Next)
+
+* Virtual grid
+* In-cell actions
+* Inline AI suggestions
+* Live transformation previews
 
 ---
 
 ## 🔧 Tech Stack
 
-| Layer     | Technology                           |
-| --------- | ------------------------------------ |
-| Frontend  | React, Custom Grid Engine            |
-| Desktop   | Tauri (Rust + WebView)               |
-| Mobile    | React Native                         |
-| Backend   | Node.js / Python                     |
-| AI        | OpenAI API / Open-source LLMs        |
-| Databases | SQLite (offline), PostgreSQL (cloud) |
+| Layer       | Technology                              |
+| ----------- | --------------------------------------- |
+| Frontend    | Next.js                                 |
+| Processing  | Python                                  |
+| AI Layer    | Gemini / Free APIs + JSON Schema Router |
+| Experiments | Jupyter Notebooks                       |
+| Storage     | None yet (CSV in-memory)                |
 
 ---
 
-## 🗂️ Implementation Roadmap
+## 📂 Project Structure (V2)
 
-### **Phase 1 — MVP: AI CSV Tool (4–6 weeks)**
+```
+/project
+   /app                     → Next.js frontend
+   /prompts
+      router_prompt.txt     → system prompt for AI router
+      action_schema.json    → JSON schema for AI output
+   /scripts
+      router.py             → reads AI result & runs actions
+      /actions              → modular operations
+         clean_columns.py
+         summarize.py
+         filter_rows.py
+         sort_rows.py
+         ...
+   /notebooks               → prototype workflows
+   README.md                → (this file)
+```
 
-* CSV Upload
-* AI-powered data cleaning
-* Automated summaries & insights
-* AI chart suggestions
-* Cleaned CSV download
-* **Output:** Web-only MVP
+---
 
-### **Phase 2 — Core Spreadsheet Engine (2–3 months)**
+## 🛠️ Implementation Roadmap (Updated for V2)
 
-* Virtualized grid component
-* Cell editing & formatting
+### **Phase 1 — V1 Prototype (Completed)**
+
+* CSV upload
+* Free AI API integration
+* Notebook experiments
+
+### **Phase 2 — V2 Command Router (CURRENT)**
+
+* Router Prompt
+* JSON Schema
+* Python action engine
+* Next.js → Python data flow
+* Consistent, deterministic operations
+
+### **Phase 3 — Spreadsheet Engine Core**
+
+* Grid component (Next.js)
+* Virtualized cells
 * Basic formulas
-* Undo/redo system
+* Undo/redo
 
-### **Phase 3 — Deep AI Integration (4–6 weeks)**
+### **Phase 4 — Deep AI Integration**
 
 * AI formula generator
-* In-grid cleaning
-* Insight side panel
-* Auto dashboards & charts
+* AI insight side panel
+* AI cleaning suggestions
+* Auto-charts
 
-### **Phase 4 — Cross-Platform Expansion (2–4 weeks)**
+### **Phase 5 — Cross-Platform**
 
-* Tauri desktop app
-* React Native mobile app
+* Desktop via Tauri
+* Mobile via React Native
 
-### **Phase 5 — Business Layer (2–3 weeks)**
+### **Phase 6 — Business Layer**
 
 * Freemium AI limits
-* Subscription tiers
-* Template marketplace
-* User accounts
-
-### **Phase 6 — Growth & Scaling (Ongoing)**
-
-* Collaboration
-* Real-time syncing
-* Advanced dashboards
-* Business API
+* Accounts & templates
+* Team features & collaboration
 
 ---
 
-## 💰 Monetization Strategy
+## 💡 Why V2 Is a Major Upgrade
 
-* Freemium model (AI limits)
-* Monthly/annual subscriptions
-* Template marketplace
-* Enterprise API
-* Automated data-cleaning services
-
----
-
-## 🌟 Why This Project Stands Out
-
-* **AI-first** design—not an add-on
-* **Zero learning curve**
-* **Runs everywhere** (web/desktop/mobile)
-* **Fully offline support**
-* **Built with ₹0 initial cost**
-* **Evolves from simple tool → complete spreadsheet ecosystem**
+* **Predictable AI** — JSON schema avoids hallucinated actions.
+* **Modular backend** — every operation is an isolated Python file.
+* **Scalable** — easy to add new operations in the future.
+* **Frontend-agnostic** — same engine can power web, desktop, and mobile later.
+* **Developer-friendly** — prompt files, schema, scripts separated cleanly.
 
 ---
 
 ## 🧠 In One Sentence
 
-**An AI-first spreadsheet system that starts as a simple CSV cleaner and grows into a full cross-platform productivity suite—making data analysis accessible to everyone.**
+**V2 transforms the prototype into a structured AI-directed spreadsheet engine with a real backend architecture, deterministic operations, and a scalable command routing system.**
 
 ---
