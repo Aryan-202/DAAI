@@ -1,15 +1,3 @@
-Here is a **clean, realistic, professional V2 README** based on your **actual architecture** and the **AI-router system you are now implementing**.
-
-This version reflects:
-
-* Next.js front-end (current state)
-* Python processing layer (scripts, notebooks, prompts)
-* AI Router Prompt + JSON Schema
-* Data-flow between frontend ↔ Python
-* Your MVP (CSV cleaner → Spreadsheet engine)
-* Realistic scope — no overclaiming
-
-You can paste this directly into **README.md**.
 
 ---
 
