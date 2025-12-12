@@ -18,9 +18,9 @@ import { Separator } from "@/components/ui/separator";
 
 export function Input() {
   return (
-    <div className="grid w-full max-w-sm gap-6">
+    <div className="grid w-full gap-6">
       <InputGroup>
-        <InputGroupTextarea placeholder="Ask, Search or Chat..." />
+        <InputGroupTextarea placeholder="Ask, Search or Chat..." className="pl-6 pt-6"/>
         <InputGroupAddon align="block-end">
           <InputGroupButton
             variant="outline"
@@ -46,7 +46,7 @@ export function Input() {
           <InputGroupText className="ml-auto">52% used</InputGroupText>
           <Separator orientation="vertical" className="!h-4" />
           <InputGroupButton
-            variant="default"
+            variant="outline"
             className="rounded-full"
             size="icon-xs"
             disabled
