@@ -1,7 +1,0 @@
-#ai
-google-genai
-openai
-
-
-#tools
-python-dotenv
