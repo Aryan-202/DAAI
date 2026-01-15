@@ -91,8 +91,8 @@ const Header = () => {
             {/* Documentation */}
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link href="/docs" className={navigationMenuTriggerStyle()}>
-                  Docs
+                <Link href="/contact" className={navigationMenuTriggerStyle()}>
+                  Contact
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
