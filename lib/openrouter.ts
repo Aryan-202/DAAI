@@ -1,17 +1,14 @@
-// lib/openrouter.ts
-
 export interface OpenRouterMessage {
-  role: 'system' | 'user' | 'assistant'; // Changed order, 'system' first
+  role: 'system' | 'user' | 'assistant';
   content: string;
   reasoning_details?: any;
 }
 
-// Helper function to convert chat messages to OpenRouter format
 export function convertToOpenRouterMessages(
   messages: Array<{ id: string; text: string; isUser: boolean; timestamp: Date; isTyping?: boolean; reasoning_details?: any }>
 ): OpenRouterMessage[] {
   return messages
-    .filter(msg => !msg.isTyping) // Remove typing indicators
+    .filter(msg => !msg.isTyping)
     .map(msg => {
       const role: 'user' | 'assistant' = msg.isUser ? 'user' : 'assistant';
       const message: OpenRouterMessage = {
@@ -58,5 +55,11 @@ export async function callOpenRouterAPI(
   }
 }
 
-// Daai-specific system prompt
-export const DAAI_SYSTEM_PROMPT = `You are Daai Assistant, an AI expert for the Daai platform...`; // Keep the same prompt
+
+export const DAAI_SYSTEM_PROMPT = `You are Daai Assistant, an AI expert for the Daai platform. Daai is an intelligent spreadsheet tool that helps users clean, analyze, and visualize their data using AI automation. It's designed to simplify data work by automatically handling formulas, generating insights, and creating visualizations.
+
+IMPORTANT INSTRUCTION: Always provide answers in plain text paragraphs. DO NOT use markdown formatting, bullet points, code blocks, or any special formatting. Keep responses concise - aim for 1-2 lines maximum. Speak conversationally and naturally as a helpful assistant.
+
+Your role is to help users with their spreadsheet and data analysis questions. You can assist with data cleaning, formula generation, visualization suggestions, CSV analysis, and explaining data concepts in simple terms.
+
+Remember: No markdown, just clean plain text responses.`;

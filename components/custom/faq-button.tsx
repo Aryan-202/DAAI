@@ -208,21 +208,6 @@ const FloatingFAQButton = () => {
               ease: "easeInOut"
             }}
           />
-          
-          {/* Notification badge */}
-          <AnimatePresence>
-            {!isOpen && messages.length > 2 && (
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-destructive flex items-center justify-center border-2 border-background"
-              >
-                <span className="text-xs font-bold text-white">!</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </Button>
       </motion.div>
 
