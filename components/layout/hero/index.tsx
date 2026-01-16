@@ -1,4 +1,3 @@
-// components/layout/hero/index.tsx
 "use client";
 
 import React from 'react';

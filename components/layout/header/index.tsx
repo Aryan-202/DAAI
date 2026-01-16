@@ -88,11 +88,16 @@ const Header = () => {
               </NavigationMenuLink>
             </NavigationMenuItem>
             
-            {/* Documentation */}
+            {/* Contact */}
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link href="/contact" className={navigationMenuTriggerStyle()}>
                   Contact
+                </Link>
+              </NavigationMenuLink>
+              <NavigationMenuLink asChild>
+                <Link href="/contact" className={navigationMenuTriggerStyle()}>
+                  Docs
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
