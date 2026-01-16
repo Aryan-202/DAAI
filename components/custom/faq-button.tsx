@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { callOpenRouterAPI, DAAI_SYSTEM_PROMPT, OpenRouterMessage, convertToOpenRouterMessages } from '@/lib/openrouter';
 
 const FloatingFAQButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,51 +58,81 @@ const FloatingFAQButton = () => {
     }
   }, [isOpen]);
 
-  const handleSend = () => {
-    if (!userInput.trim()) return;
+  const handleSend = async () => {
+  if (!userInput.trim()) return;
 
-    const userMessageId = `user-${Date.now()}`;
-    const newMessages = [...messages, { 
-      id: userMessageId, 
-      text: userInput, 
-      isUser: true, 
-      timestamp: new Date()
-    }];
-    setMessages(newMessages);
-    setUserInput('');
+  const userMessageId = `user-${Date.now()}`;
+  const newMessages = [...messages, { 
+    id: userMessageId, 
+    text: userInput, 
+    isUser: true, 
+    timestamp: new Date()
+  }];
+  setMessages(newMessages);
+  setUserInput('');
 
-    // Show typing indicator
-    const typingMessageId = `typing-${Date.now()}`;
-    setMessages(prev => [...prev, { 
-      id: typingMessageId, 
-      text: '', 
-      isUser: false, 
+  // Show typing indicator
+  const typingMessageId = `typing-${Date.now()}`;
+  setMessages(prev => [...prev, { 
+    id: typingMessageId, 
+    text: '', 
+    isUser: false, 
+    timestamp: new Date(),
+    isTyping: true
+  }]);
+
+  try {
+    // Get API key from environment
+    const apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
+    if (!apiKey) {
+      throw new Error('OpenRouter API key not configured');
+    }
+
+    // Prepare messages for OpenRouter
+    const openRouterMessages: OpenRouterMessage[] = [
+      {
+        role: 'system',
+        content: DAAI_SYSTEM_PROMPT
+      },
+      // Convert existing messages to OpenRouter format
+      ...convertToOpenRouterMessages(messages.filter(msg => !msg.isTyping)),
+      // Add the new user message
+      {
+        role: 'user',
+        content: userInput
+      }
+    ];
+
+    // Call OpenRouter API
+    const aiResponse = await callOpenRouterAPI(openRouterMessages, apiKey);
+
+    // Remove typing indicator
+    setMessages(prev => prev.filter(msg => msg.id !== typingMessageId));
+
+    // Add AI response
+    setMessages(prev => [...prev, {
+      id: `ai-${Date.now()}`,
+      text: aiResponse.content,
+      isUser: false,
       timestamp: new Date(),
-      isTyping: true
+      // Store reasoning details for context preservation
+      reasoning_details: aiResponse.reasoning_details
     }]);
 
-    // Simulate AI response after a delay
-    setTimeout(() => {
-      setMessages(prev => prev.filter(msg => msg.id !== typingMessageId));
-      
-      const responses = [
-        `I can help with "${userInput}". For CSV cleaning, I'd recommend checking for duplicate rows first, then standardizing date formats.`,
-        `For "${userInput}", try using the formula: =SUMIF(range, criteria). I can generate the exact formula if you share your data structure.`,
-        `Regarding "${userInput}", Daai's AI can automatically detect patterns and suggest visualizations. Would you like me to analyze a sample?`,
-        `I understand you need help with "${userInput}". Our AI can process that in seconds. Try uploading a file for instant analysis.`
-      ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      setMessages(prev => [...prev, {
-        id: `ai-${Date.now()}`,
-        text: randomResponse,
-        isUser: false,
-        timestamp: new Date()
-      }]);
-    }, 1500);
-  };
-
+  } catch (error) {
+    console.error('Error calling OpenRouter:', error);
+    // Remove typing indicator
+    setMessages(prev => prev.filter(msg => msg.id !== typingMessageId));
+    
+    // Show error message
+    setMessages(prev => [...prev, {
+      id: `error-${Date.now()}`,
+      text: 'Sorry, I encountered an error. Please check your API key or try again later.',
+      isUser: false,
+      timestamp: new Date()
+    }]);
+  }
+};
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
