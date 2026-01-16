@@ -5,7 +5,7 @@ import { callOpenRouterAPI, DAAI_SYSTEM_PROMPT } from '@/lib/openrouter';
 export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
-    const apiKey = process.env.OPENROUTER_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
