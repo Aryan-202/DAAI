@@ -83,7 +83,7 @@ const FloatingFAQButton = () => {
 
   try {
     // Get API key from environment
-    const apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
       throw new Error('OpenRouter API key not configured');
     }
