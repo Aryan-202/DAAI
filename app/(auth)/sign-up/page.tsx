@@ -1,5 +1,3 @@
-// app/(auth)/sign-up/page.tsx
-import React from 'react'
 import SignupForm from '@/components/signup-form'
 
 const SignUp = () => {

@@ -138,12 +138,12 @@ const Header = () => {
         >
           {/* Desktop Auth Buttons - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-2">
-            <Link href="/login">
+            <Link href="/sign-in">
               <Button variant="ghost" size="sm" className="hover:bg-accent/50">
                 Sign In
               </Button>
             </Link>
-            <Link href="/signup">
+            <Link href="/sign-up">
               <Button size="sm" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
                 Get Started Free
               </Button>
@@ -227,12 +227,12 @@ const Header = () => {
 
                 {/* Mobile Auth Buttons */}
                 <div className="space-y-3 border-t pt-6 px-4">
-                  <Link href="/login" className="block">
+                  <Link href="/sign-in" className="block">
                     <Button variant="outline" className="w-full hover:bg-accent/50">
                       Sign In
                     </Button>
                   </Link>
-                  <Link href="/signup" className="block">
+                  <Link href="/sign-up" className="block">
                     <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
                       Get Started Free
                     </Button>
